@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="/static/core/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Профиль</h2>
+        <div class="profile-info">
+            <p><b>Имя пользователя:</b> {{ user.username }}</p>
+            <p><b>ФИО:</b> {{ user.last_name }} {{ user.first_name }}</p>
+            <p><b>Роль:</b> {{ user.get_role_display }}</p>
+            <p><b>Email:</b> {{ user.email }}</p>
+        </div>
+        <a href="/" class="back">На главную</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+.dashboard {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px #0001;
+    text-align: center;
+}
+.tiles {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 24px;
+}
+.tile {
+    background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+    color: #fff;
+    text-decoration: none;
+    padding: 32px 24px;
+    border-radius: 16px;
+    font-size: 1.2em;
+    box-shadow: 0 2px 8px #0002;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+.tile:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 6px 24px #0003;
+}
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px #0001;
+}
+.weekday-switcher {
+    margin-bottom: 16px;
+    display: flex;
+    gap: 8px;
+}
+.weekday {
+    padding: 6px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #444;
+    background: #e3e7ee;
+    transition: background 0.2s;
+}
+.weekday.active, .weekday:hover {
+    background: #6a82fb;
+    color: #fff;
+}
+.schedule-table, .grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+.schedule-table th, .grades-table th {
+    background: #e3e7ee;
+    padding: 8px;
+}
+.schedule-table td, .grades-table td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+.back {
+    display: inline-block;
+    margin-top: 10px;
+    color: #6a82fb;
+    text-decoration: none;
+    padding: 6px 18px;
+    border-radius: 8px;
+    background: #f1f4fb;
+    transition: background 0.2s;
+}
+.back:hover {
+    background: #e3e7ee;
+}
+.profile-info p {
+    margin: 8px 0;
+}
+.avg {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 12px 0;
+}
+.login-container {
+    max-width: 320px;
+    margin: 80px auto;
+    background: #fff;
+    padding: 32px 28px;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px #0001;
+    text-align: center;
+}
+.filters {
+    margin-bottom: 18px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+@media (max-width: 700px) {
+    .container, .dashboard { padding: 12px; }
+    .tiles { flex-direction: column; gap: 16px; }
+    .tile { padding: 20px 10px; font-size: 1em; }
+}

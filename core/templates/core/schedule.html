@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание</title>
+    <link rel="stylesheet" href="/static/core/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Расписание на неделю</h2>
+        <div class="weekday-switcher">
+            {% for i, day in weekdays %}
+                <a href="?weekday={{i}}" class="weekday{% if weekday == i %} active{% endif %}">{{day}}</a>
+            {% endfor %}
+        </div>
+        <table class="schedule-table">
+            <tr>
+                <th>№</th>
+                <th>Время</th>
+                <th>Предмет</th>
+                <th>Учитель</th>
+            </tr>
+            {% for entry in entries %}
+            <tr style="background: {{ entry.subject.color }};">
+                <td>{{ entry.lesson_number }}</td>
+                <td>{{ entry.start_time }} - {{ entry.end_time }}</td>
+                <td>{{ entry.subject.name }}</td>
+                <td>{{ entry.teacher }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">Нет занятий</td></tr>
+            {% endfor %}
+        </table>
+        <a href="/" class="back">На главную</a>
+    </div>
+</body>
+</html>
