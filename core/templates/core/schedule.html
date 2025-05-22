@@ -1,15 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расписание</title>
-    <link rel="stylesheet" href="/static/core/style.css">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
 </head>
 <body>
-    <div class="container">
-        <h2>Расписание на неделю</h2>
-        <div class="weekday-switcher">
+    <nav class="navbar">
+        <div class="navbar-logo">Школьный дневник</div>
+        <div class="navbar-links">
+            <a href="/" class="navbar-link">Главная</a>
+            <a href="/schedule/" class="navbar-link active">Расписание</a>
+            <a href="/grades/" class="navbar-link">Успеваемость</a>
+            <a href="{% url 'profile' %}" class="navbar-link">Профиль</a>
+            {% if user.role == "admin" %}
+            <a href="/admin/" class="navbar-link">Админ-панель</a>
+            {% endif %}
+            <a href="/logout/" class="navbar-link logout">Выйти</a>
+        </div>
+    </nav>
+    <div class="dashboard-content">
+        <div class="diary-block">
+            <h2>Расписание на неделю</h2>
+            <div class="weekday-switcher">
             {% for i, day in weekdays %}
                 <a href="?weekday={{i}}" class="weekday{% if weekday == i %} active{% endif %}">{{day}}</a>
             {% endfor %}

@@ -14,10 +14,11 @@
             <a href="/" class="navbar-link">Главная</a>
             <a href="/schedule/" class="navbar-link">Расписание</a>
             <a href="/grades/" class="navbar-link">Успеваемость</a>
-            <a href="/profile/" class="navbar-link">Профиль</a>
+            <a href="{% url 'profile' %}" class="navbar-link">Профиль</a>
             {% if role == 'admin' %}
                 <a href="/admin/" class="navbar-link">Админ-панель</a>
             {% endif %}
+            <a href="/accounts/login/" class="navbar-link">Вход</a>
             <a href="/logout/" class="navbar-link logout">Выйти</a>
         </div>
     </nav>

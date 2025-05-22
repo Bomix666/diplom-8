@@ -8,6 +8,7 @@ class User(AbstractUser):
         ('student', 'Ученик'),
     ]
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='student')
+    classroom = models.ForeignKey('Classroom', on_delete=models.SET_NULL, null=True, blank=True)
     # Optionally: phone, parent_email, etc.
 
 class Classroom(models.Model):

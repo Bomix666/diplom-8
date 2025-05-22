@@ -1,15 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Оценки</title>
-    <link rel="stylesheet" href="/static/core/style.css">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
 </head>
 <body>
-    <div class="container">
-        <h2>Мои оценки</h2>
-        <form method="get" class="filters">
+    <nav class="navbar">
+        <div class="navbar-logo">Школьный дневник</div>
+        <div class="navbar-links">
+            <a href="/" class="navbar-link">Главная</a>
+            <a href="/schedule/" class="navbar-link">Расписание</a>
+            <a href="/grades/" class="navbar-link active">Успеваемость</a>
+            <a href="{% url 'profile' %}" class="navbar-link">Профиль</a>
+            <a href="/admin/" class="navbar-link">Админ-панель</a>
+            <a href="/admin_login/" class="navbar-link">Вход</a>
+            <a href="/logout/" class="navbar-link logout">Выйти</a>
+        </div>
+    </nav>
+    <div class="dashboard-content">
+        <div class="diary-block">
+            <h2>Мои оценки</h2>
+            <form method="get" class="filters">
             <label>Предмет:
                 <select name="subject">
                     <option value="">Все</option>

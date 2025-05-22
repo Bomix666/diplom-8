@@ -67,7 +67,7 @@ def schedule(request):
         homeworks = Homework.objects.filter(teacher=teacher, date=timezone.localdate())
     else:
         entries = ScheduleEntry.objects.filter(weekday=weekday)
-    return render(request, 'core/schedule.html', {'entries': entries, 'weekday': weekday, 'weekdays': weekdays, 'homeworks': homeworks})
+    return render(request, 'core/schedule.html', {'entries': entries, 'weekday': weekday, 'weekdays': weekdays, 'homeworks': homeworks, 'user':request.user})
 
 @login_required
 def grades(request):
