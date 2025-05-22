@@ -1,12 +1,19 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User, Classroom, Subject, Teacher, ScheduleEntry, Grade
+from .models import User, Classroom, Subject, Teacher, ScheduleEntry, Grade, Homework
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'first_name', 'last_name', 'role', 'email')
     list_filter = ('role',)
     search_fields = ('username', 'first_name', 'last_name', 'email')
+
+    fieldsets = BaseUserAdmin.fieldsets + (
+        (None, {'fields': ('role',)}),
+    )
+    add_fieldsets = BaseUserAdmin.add_fieldsets + (
+        (None, {'fields': ('role',)}),
+    )
 
 @admin.register(Classroom)
 class ClassroomAdmin(admin.ModelAdmin):
@@ -35,3 +42,9 @@ class GradeAdmin(admin.ModelAdmin):
     list_display = ('student', 'subject', 'date', 'grade', 'teacher', 'comment')
     list_filter = ('subject', 'teacher', 'date')
     search_fields = ('student__username', 'student__first_name', 'student__last_name', 'subject__name', 'teacher__user__username')
+
+@admin.register(Homework)
+class HomeworkAdmin(admin.ModelAdmin):
+    list_display = ('classroom', 'subject', 'date', 'teacher', 'text')
+    list_filter = ('classroom', 'subject', 'date')
+    search_fields = ('classroom__name', 'subject__name', 'teacher__user__username', 'text')

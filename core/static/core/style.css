@@ -1,116 +1,740 @@
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f5f7fa;
     margin: 0;
-    padding: 0;
-    color: #222;
+    background: #f7f9fa;
 }
-.dashboard {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 32px;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 2px 16px #0001;
-    text-align: center;
-}
-.tiles {
+
+.navbar {
     display: flex;
-    gap: 24px;
-    justify-content: center;
-    margin-top: 24px;
+    align-items: center;
+    justify-content: space-between;
+    background: #2a7ae2;
+    color: #fff;
+    padding: 0 24px;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(42,122,226,0.07);
 }
-.tile {
-    background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+
+.navbar-logo {
+    font-size: 1.3em;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.navbar-link {
     color: #fff;
     text-decoration: none;
-    padding: 32px 24px;
-    border-radius: 16px;
-    font-size: 1.2em;
-    box-shadow: 0 2px 8px #0002;
-    transition: transform 0.1s, box-shadow 0.1s;
-}
-.tile:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 6px 24px #0003;
-}
-.container {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 32px;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 2px 16px #0001;
-}
-.weekday-switcher {
-    margin-bottom: 16px;
-    display: flex;
-    gap: 8px;
-}
-.weekday {
-    padding: 6px 16px;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #444;
-    background: #e3e7ee;
+    padding: 8px 14px;
+    border-radius: 4px;
     transition: background 0.2s;
 }
-.weekday.active, .weekday:hover {
-    background: #6a82fb;
-    color: #fff;
+
+.navbar-link:hover, .navbar-link.active {
+    background: #1a5cb7;
 }
+
+.navbar-link.logout {
+    background: #f44336;
+    color: #fff;
+    margin-left: 8px;
+}
+
+.navbar-link.logout:hover {
+    background: #b71c1c;
+}
+
+.dashboard-content {
+    max-width: 900px;
+    margin: 32px auto 0 auto;
+    padding: 0 16px;
+}
+
+.diary-block {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 28px;
+    padding: 24px 20px 18px 20px;
+}
+
+.diary-block h2 {
+    margin-top: 0;
+    color: #2a7ae2;
+    font-size: 1.2em;
+}
+
 .schedule-table, .grades-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 16px;
-}
-.schedule-table th, .grades-table th {
-    background: #e3e7ee;
-    padding: 8px;
-}
-.schedule-table td, .grades-table td {
-    padding: 8px;
-    border-bottom: 1px solid #eee;
-}
-.back {
-    display: inline-block;
     margin-top: 10px;
-    color: #6a82fb;
+}
+
+.schedule-table th, .schedule-table td,
+.grades-table th, .grades-table td {
+    border: 1px solid #e0e0e0;
+    padding: 7px 10px;
+    text-align: left;
+}
+
+.schedule-table th, .grades-table th {
+    background: #f3f7fa;
+    color: #2a7ae2;
+}
+
+@media (max-width: 700px) {
+    .dashboard-content {
+        padding: 0 4px;
+    }
+    .diary-block {
+        padding: 12px 5px 10px 5px;
+    }
+    .navbar-links {
+        gap: 8px;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 8px 8px 0 8px;
+    }
+    .navbar-logo {
+        margin-bottom: 6px;
+    }
+}
+
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: #f7f9fa;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #2a7ae2;
+    color: #fff;
+    padding: 0 24px;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(42,122,226,0.07);
+}
+
+.navbar-logo {
+    font-size: 1.3em;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.navbar-link {
+    color: #fff;
     text-decoration: none;
-    padding: 6px 18px;
-    border-radius: 8px;
-    background: #f1f4fb;
+    padding: 8px 14px;
+    border-radius: 4px;
     transition: background 0.2s;
 }
-.back:hover {
-    background: #e3e7ee;
+
+.navbar-link:hover, .navbar-link.active {
+    background: #1a5cb7;
 }
-.profile-info p {
-    margin: 8px 0;
+
+.navbar-link.logout {
+    background: #f44336;
+    color: #fff;
+    margin-left: 8px;
 }
-.avg {
-    font-weight: bold;
-    font-size: 1.1em;
-    margin: 12px 0;
+
+.navbar-link.logout:hover {
+    background: #b71c1c;
 }
-.login-container {
-    max-width: 320px;
-    margin: 80px auto;
+
+.dashboard-content {
+    max-width: 900px;
+    margin: 32px auto 0 auto;
+    padding: 0 16px;
+}
+
+.diary-block {
     background: #fff;
-    padding: 32px 28px;
-    border-radius: 16px;
-    box-shadow: 0 2px 16px #0001;
-    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 28px;
+    padding: 24px 20px 18px 20px;
 }
-.filters {
-    margin-bottom: 18px;
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-    align-items: center;
+
+.diary-block h2 {
+    margin-top: 0;
+    color: #2a7ae2;
+    font-size: 1.2em;
 }
+
+.schedule-table, .grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.schedule-table th, .schedule-table td,
+.grades-table th, .grades-table td {
+    border: 1px solid #e0e0e0;
+    padding: 7px 10px;
+    text-align: left;
+}
+
+.schedule-table th, .grades-table th {
+    background: #f3f7fa;
+    color: #2a7ae2;
+}
+
 @media (max-width: 700px) {
-    .container, .dashboard { padding: 12px; }
-    .tiles { flex-direction: column; gap: 16px; }
-    .tile { padding: 20px 10px; font-size: 1em; }
+    .dashboard-content {
+        padding: 0 4px;
+    }
+    .diary-block {
+        padding: 12px 5px 10px 5px;
+    }
+    .navbar-links {
+        gap: 8px;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 8px 8px 0 8px;
+    }
+    .navbar-logo {
+        margin-bottom: 6px;
+    }
+}
+
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: #f7f9fa;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #2a7ae2;
+    color: #fff;
+    padding: 0 24px;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(42,122,226,0.07);
+}
+
+.navbar-logo {
+    font-size: 1.3em;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.navbar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.navbar-link:hover, .navbar-link.active {
+    background: #1a5cb7;
+}
+
+.navbar-link.logout {
+    background: #f44336;
+    color: #fff;
+    margin-left: 8px;
+}
+
+.navbar-link.logout:hover {
+    background: #b71c1c;
+}
+
+.dashboard-content {
+    max-width: 900px;
+    margin: 32px auto 0 auto;
+    padding: 0 16px;
+}
+
+.diary-block {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 28px;
+    padding: 24px 20px 18px 20px;
+}
+
+.diary-block h2 {
+    margin-top: 0;
+    color: #2a7ae2;
+    font-size: 1.2em;
+}
+
+.schedule-table, .grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.schedule-table th, .schedule-table td,
+.grades-table th, .grades-table td {
+    border: 1px solid #e0e0e0;
+    padding: 7px 10px;
+    text-align: left;
+}
+
+.schedule-table th, .grades-table th {
+    background: #f3f7fa;
+    color: #2a7ae2;
+}
+
+@media (max-width: 700px) {
+    .dashboard-content {
+        padding: 0 4px;
+    }
+    .diary-block {
+        padding: 12px 5px 10px 5px;
+    }
+    .navbar-links {
+        gap: 8px;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 8px 8px 0 8px;
+    }
+    .navbar-logo {
+        margin-bottom: 6px;
+    }
+}
+
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: #f7f9fa;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #2a7ae2;
+    color: #fff;
+    padding: 0 24px;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(42,122,226,0.07);
+}
+
+.navbar-logo {
+    font-size: 1.3em;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.navbar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.navbar-link:hover, .navbar-link.active {
+    background: #1a5cb7;
+}
+
+.navbar-link.logout {
+    background: #f44336;
+    color: #fff;
+    margin-left: 8px;
+}
+
+.navbar-link.logout:hover {
+    background: #b71c1c;
+}
+
+.dashboard-content {
+    max-width: 900px;
+    margin: 32px auto 0 auto;
+    padding: 0 16px;
+}
+
+.diary-block {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 28px;
+    padding: 24px 20px 18px 20px;
+}
+
+.diary-block h2 {
+    margin-top: 0;
+    color: #2a7ae2;
+    font-size: 1.2em;
+}
+
+.schedule-table, .grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.schedule-table th, .schedule-table td,
+.grades-table th, .grades-table td {
+    border: 1px solid #e0e0e0;
+    padding: 7px 10px;
+    text-align: left;
+}
+
+.schedule-table th, .grades-table th {
+    background: #f3f7fa;
+    color: #2a7ae2;
+}
+
+@media (max-width: 700px) {
+    .dashboard-content {
+        padding: 0 4px;
+    }
+    .diary-block {
+        padding: 12px 5px 10px 5px;
+    }
+    .navbar-links {
+        gap: 8px;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 8px 8px 0 8px;
+    }
+    .navbar-logo {
+        margin-bottom: 6px;
+    }
+}
+
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: #f7f9fa;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #2a7ae2;
+    color: #fff;
+    padding: 0 24px;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(42,122,226,0.07);
+}
+
+.navbar-logo {
+    font-size: 1.3em;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.navbar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.navbar-link:hover, .navbar-link.active {
+    background: #1a5cb7;
+}
+
+.navbar-link.logout {
+    background: #f44336;
+    color: #fff;
+    margin-left: 8px;
+}
+
+.navbar-link.logout:hover {
+    background: #b71c1c;
+}
+
+.dashboard-content {
+    max-width: 900px;
+    margin: 32px auto 0 auto;
+    padding: 0 16px;
+}
+
+.diary-block {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 28px;
+    padding: 24px 20px 18px 20px;
+}
+
+.diary-block h2 {
+    margin-top: 0;
+    color: #2a7ae2;
+    font-size: 1.2em;
+}
+
+.schedule-table, .grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.schedule-table th, .schedule-table td,
+.grades-table th, .grades-table td {
+    border: 1px solid #e0e0e0;
+    padding: 7px 10px;
+    text-align: left;
+}
+
+.schedule-table th, .grades-table th {
+    background: #f3f7fa;
+    color: #2a7ae2;
+}
+
+@media (max-width: 700px) {
+    .dashboard-content {
+        padding: 0 4px;
+    }
+    .diary-block {
+        padding: 12px 5px 10px 5px;
+    }
+    .navbar-links {
+        gap: 8px;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 8px 8px 0 8px;
+    }
+    .navbar-logo {
+        margin-bottom: 6px;
+    }
+}
+
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: #f7f9fa;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #2a7ae2;
+    color: #fff;
+    padding: 0 24px;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(42,122,226,0.07);
+}
+
+.navbar-logo {
+    font-size: 1.3em;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.navbar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.navbar-link:hover, .navbar-link.active {
+    background: #1a5cb7;
+}
+
+.navbar-link.logout {
+    background: #f44336;
+    color: #fff;
+    margin-left: 8px;
+}
+
+.navbar-link.logout:hover {
+    background: #b71c1c;
+}
+
+.dashboard-content {
+    max-width: 900px;
+    margin: 32px auto 0 auto;
+    padding: 0 16px;
+}
+
+.diary-block {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 28px;
+    padding: 24px 20px 18px 20px;
+}
+
+.diary-block h2 {
+    margin-top: 0;
+    color: #2a7ae2;
+    font-size: 1.2em;
+}
+
+.schedule-table, .grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.schedule-table th, .schedule-table td,
+.grades-table th, .grades-table td {
+    border: 1px solid #e0e0e0;
+    padding: 7px 10px;
+    text-align: left;
+}
+
+.schedule-table th, .grades-table th {
+    background: #f3f7fa;
+    color: #2a7ae2;
+}
+
+@media (max-width: 700px) {
+    .dashboard-content {
+        padding: 0 4px;
+    }
+    .diary-block {
+        padding: 12px 5px 10px 5px;
+    }
+    .navbar-links {
+        gap: 8px;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 8px 8px 0 8px;
+    }
+    .navbar-logo {
+        margin-bottom: 6px;
+    }
+}
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.navbar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.navbar-link:hover, .navbar-link.active {
+    background: #1a5cb7;
+}
+
+.navbar-link.logout {
+    background: #f44336;
+    color: #fff;
+    margin-left: 8px;
+}
+
+.navbar-link.logout:hover {
+    background: #b71c1c;
+}
+
+.dashboard-content {
+    max-width: 900px;
+    margin: 32px auto 0 auto;
+    padding: 0 16px;
+}
+
+.diary-block {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 28px;
+    padding: 24px 20px 18px 20px;
+}
+
+.diary-block h2 {
+    margin-top: 0;
+    color: #2a7ae2;
+    font-size: 1.2em;
+}
+
+.schedule-table, .grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.schedule-table th, .schedule-table td,
+.grades-table th, .grades-table td {
+    border: 1px solid #e0e0e0;
+    padding: 7px 10px;
+    text-align: left;
+}
+
+.schedule-table th, .grades-table th {
+    background: #f3f7fa;
+    color: #2a7ae2;
+}
+
+@media (max-width: 700px) {
+    .dashboard-content {
+        padding: 0 4px;
+    }
+    .diary-block {
+        padding: 12px 5px 10px 5px;
+    }
+    .navbar-links {
+        gap: 8px;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 8px 8px 0 8px;
+    }
+    .navbar-logo {
+        margin-bottom: 6px;
+    }
 }

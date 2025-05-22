@@ -1,19 +1,98 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Панель управления</title>
-    <link rel="stylesheet" href="/static/core/style.css">
+    <title>Школьный дневник</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
 </head>
 <body>
-    <div class="dashboard">
-        <h1>Добро пожаловать!</h1>
-        <div class="tiles">
-            <a href="/schedule/" class="tile">Моё расписание</a>
-            <a href="/grades/" class="tile">Оценки</a>
-            <a href="/profile/" class="tile">Профиль</a>
+    <nav class="navbar">
+        <div class="navbar-logo">Школьный дневник</div>
+        <div class="navbar-links">
+            <a href="/" class="navbar-link">Главная</a>
+            <a href="/schedule/" class="navbar-link">Расписание</a>
+            <a href="/grades/" class="navbar-link">Успеваемость</a>
+            <a href="/profile/" class="navbar-link">Профиль</a>
+            {% if role == 'admin' %}
+                <a href="/admin/" class="navbar-link">Админ-панель</a>
+            {% endif %}
+            <a href="/logout/" class="navbar-link logout">Выйти</a>
         </div>
+    </nav>
+    <div class="dashboard-content">
+
+        {% if role == 'student' %}
+        <div class="diary-block">
+            <h2>Расписание на сегодня ({{ today|date:'d E Y' }})</h2>
+            <table class="schedule-table">
+                <tr><th>№</th><th>Время</th><th>Предмет</th><th>Учитель</th></tr>
+                {% for entry in schedule_today %}
+                <tr style="background: {{ entry.subject.color }};">
+                    <td>{{ entry.lesson_number }}</td>
+                    <td>{{ entry.start_time }} - {{ entry.end_time }}</td>
+                    <td>{{ entry.subject.name }}</td>
+                    <td>{{ entry.teacher }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4">Нет уроков</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="diary-block">
+            <h2>Оценки за сегодня</h2>
+            <table class="grades-table">
+                <tr><th>Предмет</th><th>Оценка</th><th>Комментарий</th></tr>
+                {% for grade in grades_today %}
+                <tr>
+                    <td>{{ grade.subject.name }}</td>
+                    <td>{{ grade.grade }}</td>
+                    <td>{{ grade.comment }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="3">Нет оценок</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="diary-block">
+            <h2>Домашние задания на сегодня</h2>
+            <table class="grades-table">
+                <tr><th>Предмет</th><th>Задание</th><th>Учитель</th></tr>
+                {% for hw in homeworks_today %}
+                <tr>
+                    <td>{{ hw.subject.name }}</td>
+                    <td>{{ hw.text }}</td>
+                    <td>{{ hw.teacher }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="3">Нет домашних заданий</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% elif role == 'teacher' %}
+        <div class="diary-block">
+            <h2>Ваше расписание на сегодня ({{ today|date:'d E Y' }})</h2>
+            <table class="schedule-table">
+                <tr><th>№</th><th>Класс</th><th>Время</th><th>Предмет</th></tr>
+                {% for entry in schedule_today %}
+                <tr>
+                    <td>{{ entry.lesson_number }}</td>
+                    <td>{{ entry.classroom.name }}</td>
+                    <td>{{ entry.start_time }} - {{ entry.end_time }}</td>
+                    <td>{{ entry.subject.name }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4">Нет уроков</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% elif role == 'admin' %}
+        <div class="diary-block">
+            <h2>Добро пожаловать, администратор!</h2>
+            <p>Используйте <a href="/admin/">админ-панель</a> для управления школой.</p>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>
