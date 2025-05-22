@@ -4,15 +4,15 @@ from .models import User, Classroom, Subject, Teacher, ScheduleEntry, Grade, Hom
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    list_display = ('username', 'first_name', 'last_name', 'role', 'email')
-    list_filter = ('role',)
+    list_display = ('username', 'first_name', 'last_name', 'role', 'classroom', 'email')
+    list_filter = ('role', 'classroom')
     search_fields = ('username', 'first_name', 'last_name', 'email')
 
     fieldsets = BaseUserAdmin.fieldsets + (
-        (None, {'fields': ('role',)}),
+        (None, {'fields': ('role', 'classroom')}),
     )
     add_fieldsets = BaseUserAdmin.add_fieldsets + (
-        (None, {'fields': ('role',)}),
+        (None, {'fields': ('role', 'classroom')}),
     )
 
 @admin.register(Classroom)

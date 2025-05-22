@@ -80,10 +80,26 @@ def grades(request):
         subjects = teacher.subjects.all()
         grades = None
         students = None
+        message = None
         if classroom_id and subject_id:
             students = User.objects.filter(classroom__id=classroom_id, role='student')
             grades = Grade.objects.filter(teacher=teacher, subject_id=subject_id, student__in=students)
-        return render(request, 'core/grades_teacher.html', {'classrooms': classrooms, 'subjects': subjects, 'grades': grades, 'students': students})
+            if request.method == 'POST' and students.exists():
+                for student in students:
+                    grade_value = request.POST.get(f'grade_{student.id}')
+                    comment_value = request.POST.get(f'comment_{student.id}')
+                    if grade_value:  # Только если оценка введена
+                        Grade.objects.create(
+                            student=student,
+                            subject_id=subject_id,
+                            grade=grade_value,
+                            comment=comment_value or '',
+                            date=timezone.localdate(),
+                            teacher=teacher
+                        )
+                grades = Grade.objects.filter(teacher=teacher, subject_id=subject_id, student__in=students)
+                message = 'Оценки успешно сохранены.'
+        return render(request, 'core/grades_teacher.html', {'classrooms': classrooms, 'subjects': subjects, 'grades': grades, 'students': students, 'message': message})
     elif role == 'student':
         subject_id = request.GET.get('subject')
         start_date = request.GET.get('start_date')
@@ -113,10 +129,49 @@ def profile(request):
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
+from django.views.decorators.http import require_http_methods
+
+@login_required
+@require_http_methods(["GET", "POST"])
+def add_grade(request):
+    role = get_user_role(request.user)
+    if role != 'teacher':
+        return redirect('dashboard')
+    teacher = Teacher.objects.filter(user=request.user).first()
+    students = User.objects.filter(classroom__in=teacher.classrooms.all(), role='student').order_by('last_name', 'first_name')
+    subjects = teacher.subjects.all()
+    today = timezone.localdate()
+    message = None
+    if request.method == 'POST':
+        student_id = request.POST.get('student')
+        subject_id = request.POST.get('subject')
+        grade_value = request.POST.get('grade')
+        comment = request.POST.get('comment', '')
+        date_value = request.POST.get('date') or today
+        try:
+            student = students.get(id=student_id)
+            subject = subjects.get(id=subject_id)
+            Grade.objects.create(
+                student=student,
+                subject=subject,
+                grade=grade_value,
+                comment=comment,
+                date=date_value,
+                teacher=teacher
+            )
+            message = 'Оценка успешно добавлена.'
+        except Exception as e:
+            message = f'Ошибка: {e}'
+    return render(request, 'core/add_grade.html', {
+        'students': students,
+        'subjects': subjects,
+        'today': today,
+        'message': message
+    })
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect('/accounts/login/')
+    return redirect('login')
 
 def admin_login(request):
     if request.method == 'POST':

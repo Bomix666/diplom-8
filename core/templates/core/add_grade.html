@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить оценку</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+    {% include 'core/navbar.html' %}
+
+    <div class="dashboard-content">
+        <div class="diary-block">
+            <h2>Добавить оценку</h2>
+            {% if message %}
+                <div class="message">{{ message }}</div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <label>Ученик:
+                    <select name="student" required>
+                        <option value="">Выберите ученика</option>
+                        {% for student in students %}
+                        <option value="{{ student.id }}">{{ student.id }}:{{ student.last_name }} {{ student.first_name }}</option>
+                        {% endfor %}
+                    </select>
+                </label><br>
+                <label>Предмет:
+                    <select name="subject" required>
+                        <option value="">Выберите предмет</option>
+                        {% for subject in subjects %}
+                        <option value="{{ subject.id }}">{{ subject.name }}</option>
+                        {% endfor %}
+                    </select>
+                </label><br>
+                <label>Оценка:
+                    <input type="number" name="grade" min="1" max="5" required>
+                </label><br>
+                <label>Комментарий:
+                    <input type="text" name="comment">
+                </label><br>
+                <label>Дата:
+                    <input type="date" name="date" value="{{ today }}">
+                </label><br>
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

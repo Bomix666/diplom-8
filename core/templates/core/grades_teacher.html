@@ -8,18 +8,9 @@
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-logo">Школьный дневник</div>
-        <div class="navbar-links">
-            <a href="/" class="navbar-link">Главная</a>
-            <a href="/schedule/" class="navbar-link">Расписание</a>
-            <a href="/grades/" class="navbar-link active">Успеваемость</a>
-            <a href="{% url 'profile' %}" class="navbar-link">Профиль</a>
-            <a href="/admin/" class="navbar-link">Админ-панель</a>
-            <a href="/admin_login/" class="navbar-link">Вход</a>
-            <a href="/logout/" class="navbar-link logout">Выйти</a>
-        </div>
-    </nav>
+    {% include 'core/navbar.html' %}
+
+
     <div class="dashboard-content">
         <div class="diary-block">
             <h2>Журнал оценок</h2>
